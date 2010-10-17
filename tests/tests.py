@@ -25,28 +25,33 @@ from osm import osm
 EXAMPLE_BIG = os.path.join(os.path.dirname(__file__), './big.scad')
 
 
-class TestConvert(unittest.TestCase):
-    """Framework for testing file conversion."""
+class TestMinimize(unittest.TestCase):
+    """Framework for testing file minimization."""
     # pylint: disable-msg=R0904
 
     def setUp(self):
         """Set streams."""
         # pylint: disable-msg=C0103
         self.input_stream = None
-        self.stdin = sys.stdin
 
-        self.output_stream = StringIO()
-        self.stdout = sys.stdout
+
+    def test_big(self):
+        """Check that there is some output."""
+        self.input_stream = open(EXAMPLE_BIG)
+        result = osm.osm(self.input_stream)
+
+        self.assertNotEqual(
+            result,
+            None)
+        self.assertNotEqual(
+            result,
+            '')
 
 
     def tearDown(self):
         """Close streams."""
         # pylint: disable-msg=C0103
         self.input_stream.close()
-        sys.stdin = self.stdin
-
-        self.output_stream.close()
-        sys.stdout = self.stdout
 
 
 class TestDoc(unittest.TestCase):

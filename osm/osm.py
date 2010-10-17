@@ -90,18 +90,18 @@ def remove_whitespace(text):
 
 
 def osm(stream):
-    """."""
+    """Run the minimizations."""
     text = stream.read()
     text = remove_comments(text)
     text = remove_empty_start_end(text)
     text = remove_multiple_whitespace(text)
     text = remove_whitespace(text)
-    print text
+    return text
 
 
 def main(argv = None):
-    osm(sys.stdin)
-
+    result = osm(sys.stdin)
+    print result
 
 if __name__ == '__main__':
     sys.exit(main())
