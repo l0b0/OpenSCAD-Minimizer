@@ -69,10 +69,9 @@ def remove_comments(text):
     return COMMENT_RE.sub(_comment_replacer, text)
 
 
-def remove_empty_lines(text):
+def remove_empty_start_end(text):
     """Remove empty lines of text in the input."""
     text = re.sub(r'\A\n+', r'', text) # Start
-    #text = re.sub(r'\n+', r'\n', text) # Middle
     text = re.sub(r'\n+\Z', r'', text) # End
     return text
 
@@ -83,15 +82,10 @@ def remove_multiple_whitespace(text):
     return text
 
 
-def remove_space_after_line(text):
-    """."""
-    text = re.sub(r';\s+', r';', text)
-    return text
-
-
-def remove_space_around_braces(text):
-    """."""
-    text = re.sub(r'\s*([{}])\s*', r'\1', text)
+def remove_whitespace(text):
+    """Whitespace around operators, commas, braces, parentheses, and line
+    endings."""
+    text = re.sub(r'\s*([+*/=,{}();-])\s*', r'\1', text)
     return text
 
 
@@ -99,10 +93,9 @@ def osm(stream):
     """."""
     text = stream.read()
     text = remove_comments(text)
-    text = remove_empty_lines(text)
+    text = remove_empty_start_end(text)
     text = remove_multiple_whitespace(text)
-    text = remove_space_after_line(text)
-    text = remove_space_around_braces(text)
+    text = remove_whitespace(text)
     print text
 
 
