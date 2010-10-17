@@ -7,7 +7,7 @@ from setuptools import find_packages, setup
 from osm.osm import __doc__ as module_doc
 
 setup(
-    name = 'OpenSCAD Minimizer',
+    name = 'OpenSCAD-Minimizer',
     version = '0.1',
     description = 'Reduce the size of your .scad file',
     long_description = module_doc,

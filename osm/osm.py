@@ -16,8 +16,6 @@ Examples:
 osm < old.scad > new.scad
     Minimize old.scad and save the result in new.scad.
 
-<http://www.thingiverse.com/thing:4448>
-
 Bugs:
 
 Please email bug reports including a minimal test file (if applicable) to
