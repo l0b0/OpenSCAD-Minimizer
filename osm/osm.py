@@ -34,41 +34,75 @@ import re
 import signal
 import sys
 
+COMMENT_RE = re.compile(
+    r'(^)?[^\S\n]*/(?:\*(.*?)\*/[^\S\n]*|/[^\n]*)($)?',
+    re.DOTALL | re.MULTILINE
+)
+
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 """Avoid 'Broken pipe' message when canceling piped command."""
 
 
-def remove_multi_line_comments(text):
-    """."""
-    text = re.sub(r'/\*.*\*/', r'', text)
-    return text
+def _comment_replacer(match):
+    start,mid,end = match.group(1,2,3)
+    if mid is None:
+        # single line comment
+        return ''
+    elif start is not None or end is not None:
+        # multi line comment at start or end of a line
+        return ''
+    elif '\n' in mid:
+        # multi line comment with line break
+        return '\n'
+    else:
+        # multi line comment without line break
+        return ' '
+
+
+def remove_comments(text):
+    """
+    Remove single- and multi-line comments.
+
+    Thanks to MizardX for the code
+    <http://stackoverflow.com/questions/844681/python-regex-question-stripping-multi-line-comments-but-maintaining-a-line-break/844721#844721>.
+    """
+    return COMMENT_RE.sub(_comment_replacer, text)
 
 
 def remove_empty_lines(text):
     """Remove empty lines of text in the input."""
     text = re.sub(r'\A\n+', r'', text) # Start
-    text = re.sub(r'\n+', r'\n', text) # Middle
+    #text = re.sub(r'\n+', r'\n', text) # Middle
     text = re.sub(r'\n+\Z', r'', text) # End
     return text
 
-def remove_single_line_comments(text):
+
+def remove_multiple_whitespace(text):
     """."""
-    #TODO
+    text = re.sub(r'(\s)\s+', r'\1', text)
     return text
 
 
-def remove_newlines(text):
+def remove_space_after_line(text):
     """."""
-    #TODO
+    text = re.sub(r';\s+', r';', text)
+    return text
+
+
+def remove_space_around_braces(text):
+    """."""
+    text = re.sub(r'\s*([{}])\s*', r'\1', text)
     return text
 
 
 def osm(stream):
     """."""
     text = stream.read()
-    text = remove_multi_line_comments(text)
-    text = remove_single_line_comments(text)
+    text = remove_comments(text)
     text = remove_empty_lines(text)
+    text = remove_multiple_whitespace(text)
+    text = remove_space_after_line(text)
+    text = remove_space_around_braces(text)
     print text
 
 
