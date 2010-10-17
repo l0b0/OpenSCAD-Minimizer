@@ -8,10 +8,10 @@ from osm.osm import __doc__ as module_doc
 
 setup(
     name = 'OpenSCAD-Minimizer',
-    version = '0.1',
+    version = '0.2',
     description = 'Reduce the size of your .scad file',
     long_description = module_doc,
-    url = 'http://github.com/l0b0/OpenSCAD-minimizer',
+    url = 'http://github.com/l0b0/OpenSCAD-Minimizer',
     keywords = 'OpenSCAD SCAD minimizer generator',
     packages = find_packages(exclude=['tests']),
     install_requires = [],
@@ -33,7 +33,7 @@ setup(
     author_email = 'victor.engmark@gmail.com',
     maintainer = 'Victor Engmark',
     maintainer_email = 'victor.engmark@gmail.com',
-    download_url = 'http://github.com/l0b0/OpenSCAD-minimizer',
+    download_url = 'http://github.com/l0b0/OpenSCAD-Minimizer',
     platforms = ['POSIX', 'Windows'],
     license = 'GPL v3 or newer',
     )

@@ -14,15 +14,15 @@ __email__ = 'victor.engmark@gmail.com'
 __copyright__ = 'Copyright (C) 2010 Victor Engmark'
 __license__ = 'GPLv3'
 
-import doctest
-import os
+from doctest import testmod
+from os.path import join, dirname
 from cStringIO import StringIO
 import sys
 import unittest
 
 from osm import osm
 
-EXAMPLE_BIG = os.path.join(os.path.dirname(__file__), './big.scad')
+EXAMPLE_BIG = join(dirname(__file__), './big.scad')
 
 
 class TestMinimize(unittest.TestCase):
@@ -58,7 +58,7 @@ class TestDoc(unittest.TestCase):
     """Test Python documentation strings."""
     def test_doc(self):
         """Documentation tests."""
-        self.assertEqual(doctest.testmod(osm)[0], 0)
+        self.assertEqual(testmod(osm)[0], 0)
 
 
 def main():

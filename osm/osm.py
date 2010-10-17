@@ -27,17 +27,16 @@ __email__ = 'victor.engmark@gmail.com'
 __copyright__ = 'Copyright (C) 2010 Victor Engmark'
 __license__ = 'GPLv3'
 
-import os
-import re
-import signal
+from re import compile, sub, DOTALL, MULTILINE
+from signal import signal, SIGPIPE, SIG_DFL
 import sys
 
-COMMENT_RE = re.compile(
+COMMENT_RE = compile(
     r'(^)?[^\S\n]*/(?:\*(.*?)\*/[^\S\n]*|/[^\n]*)($)?',
-    re.DOTALL | re.MULTILINE
+    DOTALL | MULTILINE
 )
 
-signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+signal(SIGPIPE, SIG_DFL)
 """Avoid 'Broken pipe' message when canceling piped command."""
 
 
@@ -69,21 +68,21 @@ def remove_comments(text):
 
 def remove_empty_start_end(text):
     """Remove empty lines of text in the input."""
-    text = re.sub(r'\A\n+', r'', text) # Start
-    text = re.sub(r'\n+\Z', r'', text) # End
+    text = sub(r'\A\n+', r'', text) # Start
+    text = sub(r'\n+\Z', r'', text) # End
     return text
 
 
 def remove_multiple_whitespace(text):
     """."""
-    text = re.sub(r'(\s)\s+', r'\1', text)
+    text = sub(r'(\s)\s+', r'\1', text)
     return text
 
 
 def remove_whitespace(text):
     """Whitespace around operators, commas, braces, parentheses, and line
     endings."""
-    text = re.sub(r'\s*([+*/=,{}();-])\s*', r'\1', text)
+    text = sub(r'\s*([+*/=,{}();-])\s*', r'\1', text)
     return text
 
 
