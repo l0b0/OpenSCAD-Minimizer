@@ -9,7 +9,7 @@ osm < input_file
 
 Description:
 
-Removes unnecessary whitespace and comments.
+Removes unnecessary character data.
 
 Examples:
 

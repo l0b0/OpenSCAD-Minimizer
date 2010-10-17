@@ -1,5 +1,5 @@
 OpenSCAD Minimizer - Reduce the size of your .scad file
 
-This can be used for example if you want to encode your entire design as a QR code (using for example http://www.mobilefish.com/services/qrcode/qrcode.php).
+This can be used for example if you want to encode your entire design as a QR code (using for example http://zxing.appspot.com/generator/).
 
 Can be installed / upgraded by running `sudo easy_install -U OpenSCAD-Minimizer`.

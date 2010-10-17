@@ -12,7 +12,7 @@ setup(
     description = 'Reduce the size of your .scad file',
     long_description = module_doc,
     url = 'http://github.com/l0b0/OpenSCAD-Minimizer',
-    keywords = 'OpenSCAD SCAD minimizer generator',
+    keywords = 'OpenSCAD SCAD CAD minimizer generator text code',
     packages = find_packages(exclude=['tests']),
     install_requires = [],
     entry_points = {

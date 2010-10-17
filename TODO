@@ -1,7 +1,1 @@
-Remove multi-line comments (can they be nested or not?).
-
-Remove single-line comments (after multi-line comments to make sure they don't contain the end of a multi-line comment, e.g. "/*foo\n//bar\*\n").
-
-Remove empty lines.
-
-Remove newlines after semicolons and around braces.
+Replace identifiers with smaller strings.
